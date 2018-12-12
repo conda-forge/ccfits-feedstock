@@ -12,19 +12,19 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1000
   skip: true  # [win]
 
 requirements:
- 
- build:
-     - toolchain
-     - cfitsio 3.410
-     - cmake
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+  host:
+    - cfitsio 3.410
+  run:
+    - cfitsio 3.410|3.420
 
- run:
-     - cfitsio 3.410|3.420
-   
 test:
   commands:
     - test -f ${PREFIX}/lib/libCCfits.so  # [linux]
@@ -33,12 +33,11 @@ test:
     - conda inspect linkages -p $PREFIX ccfits  # [not win]
     - conda inspect objects -p $PREFIX ccfits  # [osx]
 
-   
 about:
   summary: CCfits is an object oriented interface to the cfitsio library. It is
-   designed to make the capabilities of cfitsio available to programmers 
-   working in C++. It is written in ANSI C++ and implemented using the 
-   C++ Standard Library with namespaces, exception handling, and member 
+   designed to make the capabilities of cfitsio available to programmers
+   working in C++. It is written in ANSI C++ and implemented using the
+   C++ Standard Library with namespaces, exception handling, and member
    template functions.
   home: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/
   license: CUSTOM
@@ -48,3 +47,4 @@ about:
 extra:
   recipe-maintainers:
     - giacomov
+    - beckermr
