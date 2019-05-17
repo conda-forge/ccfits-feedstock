@@ -1,12 +1,21 @@
 #!/bin/bash
 
+declare -a CMAKE_PLATFORM_FLAGS
+if [[ -n "${OSX_ARCH}" ]]; then
+    CMAKE_PLATFORM_FLAGS+=(-DCMAKE_OSX_SYSROOT="${CONDA_BUILD_SYSROOT}")
+else
+    CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
+fi
+
 mkdir build
 cd build
 
 cmake \
     -DCMAKE_PREFIX_PATH=${PREFIX} \
     -DCMAKE_INSTALL_PREFIX:PATH=${PREFIX} \
-    -DBUILD_SHARED_LIBS=on ..
+    -DBUILD_SHARED_LIBS=on \
+    ${CMAKE_PLATFORM_FLAGS[@]} \
+    ..
 
 make CCfits
 
