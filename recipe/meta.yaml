@@ -7,19 +7,25 @@ package:
   version: {{ version }}
 
 source:
-  fn: CCfits-{{version}}.tar.gz
   url: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/CCfits-{{version}}.tar.gz
+  folder: CCfits
   sha256: {{ sha256 }}
+  patches:
+    - 0001-Add_missing_m4_macros.patch
+    - 0002-Fix_CXX_LIB_PATH_macro.patch
 
 build:
-  number: 1000
+  number: 1002
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake
+    - automake
+    - autoconf
+    - libtool
+    - make
   host:
     - cfitsio
   run:
@@ -27,11 +33,11 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/lib/libCCfits.so  # [linux]
-    - test -f ${PREFIX}/lib/libCCfits.dylib  # [osx]
-    - test -d ${PREFIX}/include/CCfits
-    - conda inspect linkages -p $PREFIX ccfits  # [not win]
-    - conda inspect objects -p $PREFIX ccfits  # [osx]
+    - test -f ${CONDA_PREFIX}/lib/libCCfits.so  # [linux]
+    - test -f ${CONDA_PREFIX}/lib/libCCfits.dylib  # [osx]
+    - test -d ${CONDA_PREFIX}/include/CCfits
+    - conda inspect linkages -p $CONDA_PREFIX ccfits  # [not win]
+    - conda inspect objects -p $CONDA_PREFIX ccfits  # [osx]
 
 about:
   summary: CCfits is an object oriented interface to the cfitsio library. It is
@@ -41,10 +47,11 @@ about:
    template functions.
   home: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/
   license: CUSTOM
-  license_file: License.txt
+  license_file: CCfits/License.txt
   doc_url: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/html/index.html
 
 extra:
   recipe-maintainers:
     - giacomov
     - beckermr
+    - teake
