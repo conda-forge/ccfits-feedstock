@@ -1,0 +1,17 @@
+The old macro ends up pointing to $BUILD_PREFIX/lib, while we should point to 
+$PREFIX/lib. Note that this doesn't fully eliminate linking to $BUILD_PREFIX.
+Not sure how to fix that, but at least conda removes those RPATHs.
+
+diff --git a/config/m4/pfk_cxx_lib_path.m4 b/config/m4/pfk_cxx_lib_path.m4
+index a5e345e..6d97cc3 100644
+--- a/config/m4/pfk_cxx_lib_path.m4
++++ b/config/m4/pfk_cxx_lib_path.m4
+@@ -11,7 +11,7 @@ dnl
+ AC_DEFUN([PFK_CXX_LIB_PATH],
+ [ AC_PATH_PROG(pfk_cxx_lib_path, $CXX, $CXX )
+   AC_MSG_CHECKING(standard C++ library path)
+-  CXX_LIB_PATH=`dirname $pfk_cxx_lib_path | sed -e "s/bin/lib/"`
++  CXX_LIB_PATH="$PREFIX/lib"
+   AC_MSG_RESULT($CXX_LIB_PATH )
+   AC_SUBST(CXX_LIB_PATH)dnl
+ ])

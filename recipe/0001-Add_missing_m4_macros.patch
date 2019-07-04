@@ -1,0 +1,12 @@
+diff --git a/configure.in b/configure.in
+index fa4870c..478a9cc 100644
+--- a/configure.in
++++ b/configure.in
+@@ -4,6 +4,7 @@ dnl Author: Paul_Kunz@slac.stanford.edu
+
+ AC_REVISION($Revision: 3.24 $)
+
++AC_CONFIG_MACRO_DIRS([config/m4])
+ AC_INIT(FITS.cxx)
+ AM_CONFIG_HEADER(config.h)
+ AC_CONFIG_AUX_DIR(config)
