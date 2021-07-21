@@ -11,7 +11,7 @@ source:
   folder: CCfits
   sha256: {{ sha256 }}
   patches:
-    # - 0001-Add_missing_m4_macros.patch
+    - 0001-Add_missing_m4_macros.patch
     - 0002-Fix_CXX_LIB_PATH_macro.patch
 
 build:
