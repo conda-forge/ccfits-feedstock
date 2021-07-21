@@ -1,10 +1,23 @@
+Add missing AC_CONFIG_MACRO_DIRS macro and reorder AC_CONFIG_AUX_DIR
+
+The order of the macros appears to be important, cf.
+https://www.mail-archive.com/automake@gnu.org/msg20214.html.
+If AC_CONFIG_AUX_DIR comes after AC_CANONICAL_TARGET, it cannot properly
+find the config dir, which sets $ac_aux_dir to an empty value in configure,
+resulting in configure not being able to find install-sh.
+
 --- a/configure.ac
-+++ b/configure.ac
-@@ -2,6 +2,7 @@
- dnl
++++ b/Users/teakewerk/Code/Other/feedstocks/ccfits-feedstock/configure.ac
+@@ -3,10 +3,11 @@ dnl
  dnl Author: Paul_Kunz@slac.stanford.edu
- 
-+AC_CONFIG_MACRO_DIRS([config/m4])
+
  AC_INIT([CCfits], [2.6], [], CCfits)
++AC_CONFIG_AUX_DIR(config)
  AC_CANONICAL_TARGET
  AC_CONFIG_SRCDIR([FITS.cxx])
+ AC_CONFIG_HEADERS(config.h)
+-AC_CONFIG_AUX_DIR(config)
++AC_CONFIG_MACRO_DIRS([config/m4])
+ AM_INIT_AUTOMAKE
+
+ AC_LANG([C++])
