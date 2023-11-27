@@ -1,11 +1,11 @@
-About ccfits
-============
+About ccfits-feedstock
+======================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ccfits-feedstock/blob/main/LICENSE.txt)
 
 Home: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/
 
 Package license: CUSTOM
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ccfits-feedstock/blob/main/LICENSE.txt)
 
 Summary: CCfits is an object oriented interface to the cfitsio library. It is designed to make the capabilities of cfitsio available to programmers working in C++. It is written in ANSI C++ and implemented using the C++ Standard Library with namespaces, exception handling, and member template functions.
 
@@ -123,7 +123,7 @@ available continuous integration services. Thanks to the awesome service provide
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
 [Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
 it is possible to build and upload installable packages to the
-[conda-forge](https://anaconda.org/conda-forge) [Anaconda-Cloud](https://anaconda.org/)
+[conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
 
 To manage the continuous integration and simplify feedstock maintenance
