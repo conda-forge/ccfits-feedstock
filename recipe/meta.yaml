@@ -1,13 +1,13 @@
 {% set name = "ccfits" %}
-{% set version = "2.6" %}
-{% set sha256 = "c8395e80379df4e2a63b0890166fb47be4b96dff977214e7ed10ea9d3e9e9a9e" %}
+{% set version = "2.7" %}
+{% set sha256 = "f63546d2feecbf732cc08aaaa80a2eb5334ada37fb2530181b7363a5dbdeb01a" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/CCfits-{{ version }}.tar.gz
+  url: https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/ccfits/CCfits-{{ version }}.tar.gz
   folder: CCfits
   sha256: {{ sha256 }}
   patches:
@@ -15,12 +15,13 @@ source:
     - 0002-Fix_CXX_LIB_PATH_macro.patch
 
 build:
-  number: 4
+  number: 0
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - automake
     - autoconf

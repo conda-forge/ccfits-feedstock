@@ -6,12 +6,14 @@ If AC_CONFIG_AUX_DIR comes after AC_CANONICAL_TARGET, it cannot properly
 find the config dir, which sets $ac_aux_dir to an empty value in configure,
 resulting in configure not being able to find install-sh.
 
+diff --git a/configure.ac b/configure.ac
+index c90d350..5dc1bd9 100644
 --- a/configure.ac
-+++ b/Users/teakewerk/Code/Other/feedstocks/ccfits-feedstock/configure.ac
++++ b/configure.ac
 @@ -3,10 +3,11 @@ dnl
  dnl Author: Paul_Kunz@slac.stanford.edu
-
- AC_INIT([CCfits], [2.6], [], CCfits)
+ 
+ AC_INIT([CCfits], [2.7], [], CCfits)
 +AC_CONFIG_AUX_DIR(config)
  AC_CANONICAL_TARGET
  AC_CONFIG_SRCDIR([FITS.cxx])
@@ -19,5 +21,5 @@ resulting in configure not being able to find install-sh.
 -AC_CONFIG_AUX_DIR(config)
 +AC_CONFIG_MACRO_DIRS([config/m4])
  AM_INIT_AUTOMAKE
-
+ 
  AC_LANG([C++])
