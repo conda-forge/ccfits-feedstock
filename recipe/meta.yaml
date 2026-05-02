@@ -7,7 +7,7 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/CCfits-{{ version }}.tar.gz
+  url: https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/ccfits/v{{ version }}/CCfits-{{ version }}.tar.gz
   folder: CCfits
   sha256: {{ sha256 }}
   patches:
