@@ -4,10 +4,10 @@
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
-  url: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/CCfits-{{ version }}.tar.gz
+  url: https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/ccfits/v{{ version }}/CCfits-{{ version }}.tar.gz
   folder: CCfits
   sha256: {{ sha256 }}
   patches:
@@ -15,13 +15,14 @@ source:
     - 0002-Fix_CXX_LIB_PATH_macro.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
     - automake
     - autoconf
     - libtool
@@ -47,4 +48,3 @@ about:
 extra:
   recipe-maintainers:
     - giacomov
-    - teake
