@@ -3,14 +3,14 @@ schema_version: 1
 context:
   name: ccfits
   version: "2.6"
-  sha256: c8395e80379df4e2a63b0890166fb47be4b96dff977214e7ed10ea9d3e9e9a9e
+  sha256: 2bb439db67e537d0671166ad4d522290859e8e56c2f495c76faa97bc91b28612
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/CCfits-${{ version }}.tar.gz
+  url: https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/ccfits/v${{ version }}/CCfits-${{ version }}.tar.gz
   sha256: ${{ sha256 }}
   target_directory: CCfits
   patches:
