@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: ccfits
+  version: "2.6"
+  sha256: c8395e80379df4e2a63b0890166fb47be4b96dff977214e7ed10ea9d3e9e9a9e
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/CCfits-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+  target_directory: CCfits
+  patches:
+    - 0001-Add_missing_m4_macros.patch
+    - 0002-Fix_CXX_LIB_PATH_macro.patch
+
+build:
+  number: 5
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - automake
+    - autoconf
+    - libtool
+    - make
+  host:
+    - cfitsio
+  run:
+    - cfitsio
+
+tests:
+  - script:
+      - if: linux
+        then: test -f ${CONDA_PREFIX}/lib/libCCfits.so
+      - if: osx
+        then: test -f ${CONDA_PREFIX}/lib/libCCfits.dylib
+      - test -d ${CONDA_PREFIX}/include/CCfits
+
+about:
+  summary: CCfits is an object oriented interface to the cfitsio library. It is designed to make the capabilities of cfitsio available to programmers working in C++. It is written in ANSI C++ and implemented using the C++ Standard Library with namespaces, exception handling, and member template functions.
+  license: VOSTROM
+  license_file: CCfits/License.txt
+  homepage: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/
+  documentation: https://heasarc.gsfc.nasa.gov/fitsio/ccfits/html/index.html
+
+extra:
+  recipe-maintainers:
+    - giacomov
+    - teake
