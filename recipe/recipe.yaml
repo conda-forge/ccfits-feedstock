@@ -27,34 +27,30 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - ${{ stdlib('c') }}
+    - make
     - if: not win
-      then: automake
-    - if: not win
-      then: autoconf
-    - if: not win
-      then: libtool
+      then: 
+        - automake
+        - autoconf
+        - libtool
     - if: win
       then: autotools_clang_conda
-    - make
   host:
     - cfitsio
   run:
     - cfitsio
 
 tests:
-  - script:
-      - if: linux
-        then: test -f ${CONDA_PREFIX}/lib/libCCfits.so
-      - if: osx
-        then: test -f ${CONDA_PREFIX}/lib/libCCfits.dylib
-      - if: not win
-        then: test -d ${CONDA_PREFIX}/include/CCfits
-      - if: win
-        then: if not exist "%LIBRARY_PREFIX%\bin\CCfits-*.dll" exit 1
-      - if: win
-        then: if not exist "%LIBRARY_PREFIX%\lib\ccfits.lib" exit 1
-      - if: win
-        then: if not exist "%LIBRARY_PREFIX%\include\CCfits" exit 1
+  - package_contents:
+      lib:
+        - if: not win
+          then: CCfits
+        - if: win
+          then: 
+            - CCfits-*.dll
+            - ccfits.lib
+      include:
+        - CCfits/*
 
 about:
   summary: CCfits is an object oriented interface to the cfitsio library. It is designed to make the capabilities of cfitsio available to programmers working in C++. It is written in ANSI C++ and implemented using the C++ Standard Library with namespaces, exception handling, and member template functions.
