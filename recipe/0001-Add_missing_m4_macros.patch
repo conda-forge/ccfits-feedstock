@@ -7,7 +7,7 @@ find the config dir, which sets $ac_aux_dir to an empty value in configure,
 resulting in configure not being able to find install-sh.
 
 --- a/configure.ac
-+++ b/Users/teakewerk/Code/Other/feedstocks/ccfits-feedstock/configure.ac
++++ b/configure.ac
 @@ -3,10 +3,11 @@ dnl
  dnl Author: Paul_Kunz@slac.stanford.edu
 
