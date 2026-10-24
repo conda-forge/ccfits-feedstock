@@ -2,8 +2,8 @@ schema_version: 1
 
 context:
   name: ccfits
-  version: "2.6"
-  sha256: 2bb439db67e537d0671166ad4d522290859e8e56c2f495c76faa97bc91b28612
+  version: "2.7"
+  sha256: f63546d2feecbf732cc08aaaa80a2eb5334ada37fb2530181b7363a5dbdeb01a
 
 package:
   name: ${{ name|lower }}
@@ -20,7 +20,7 @@ source:
       then: 0003-Pass_no_undefined_libtool.patch
 
 build:
-  number: 6
+  number: 0
 
 requirements:
   build:
