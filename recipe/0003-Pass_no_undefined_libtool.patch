@@ -1,0 +1,21 @@
+Fix Windows shared library build by specifying -no-undefined to libtool
+
+Libtool refuses to build shared libraries (DLLs) on Windows/MinGW platforms
+unless it is explicitly told that all symbols will be resolved at link time.
+Otherwise, the build fails with the error: "can't build x86_64-w64-mingw32
+shared library unless -no-undefined is specified".
+
+Adding -no-undefined to libCCfits_la_LDFLAGS forces libtool to build the 
+dynamic library (.dll) instead of falling back to a static-only build.
+
+--- Makefile.am
++++ Makefile.am
+@@ -63,7 +63,7 @@
+ # This will tell shared library which STD C++ library to use without
+ # needing the user to use LD_LIBRARY_PATH environment variable
+ libCCfits_la_LIBADD = $(LIBSTDCPP)
+-libCCfits_la_LDFLAGS = -R $(R_LIB_PATH) -R $(CXX_LIB_PATH)
++libCCfits_la_LDFLAGS = -no-undefined -Xlinker -Wl,-EXPORT:?s_verboseMode@FITS@CCfits@@0_NA,-EXPORT:?ULBASE@CCfits@@3KB,-EXPORT:?USBASE@CCfits@@3KB -R $(R_LIB_PATH) -R $(CXX_LIB_PATH)
+ 
+ libCCfits_ladir = $(pkgincludedir)
+ 
