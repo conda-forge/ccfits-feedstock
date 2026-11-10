@@ -20,7 +20,7 @@ source:
       then: 0003-Pass_no_undefined_libtool.patch
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -29,7 +29,7 @@ requirements:
     - ${{ stdlib('c') }}
     - make
     - if: not win
-      then: 
+      then:
         - automake
         - autoconf
         - libtool
@@ -46,7 +46,7 @@ tests:
         - if: not win
           then: CCfits
         - if: win
-          then: 
+          then:
             - CCfits-*.dll
             - ccfits.lib
       include:
