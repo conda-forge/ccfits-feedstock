@@ -20,7 +20,7 @@ source:
       then: 0003-Pass_no_undefined_libtool.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
