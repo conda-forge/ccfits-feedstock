@@ -4,3 +4,7 @@ if %ERRORLEVEL% neq 0 exit 1
 for /f "delims=" %%i in ('cygpath -m %PREFIX%') do set "LIBRARY_PREFIX=%%i"
 sed -i "s|%PREFIX%|%LIBRARY_PREFIX%|g" %LIBRARY_PREFIX%\lib\pkgconfig\CCfits.pc
 if %ERRORLEVEL% neq 0 exit 1
+
+for /f "delims=" %%i in ('cygpath -w %PREFIX%') do set "LIBRARY_PREFIX=%%i"
+copy /y CCfits\MSconfig.h %LIBRARY_PREFIX%\include\CCfits
+if %ERRORLEVEL% neq 0 exit 1
